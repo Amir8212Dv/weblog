@@ -5,7 +5,8 @@ const userSchema = new mongoose.Schema({
     password : {type : String , required : true}
 } , {
     id : false,
-    timestamps : true
+    timestamps : true,
+    versionKey : false
 })
 
 export const userModel = mongoose.model('user' , userSchema)

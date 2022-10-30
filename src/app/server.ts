@@ -3,6 +3,7 @@ import cors from 'cors'
 import path from 'path'
 import mongoose from 'mongoose'
 import { NotFound } from "http-errors";
+import { router } from "./routes/router";
 
 export class Application {
     private app = express()
@@ -18,6 +19,7 @@ export class Application {
         this.app.use(cors())
         this.app.use(express.urlencoded({extended : true}))
         this.app.use(express.static(path.join(__dirname , 'public')))
+        this.app.use(router)
 
         this.app.listen(+(process.env.PORT as string) , () => console.log(`server running on localhost:${process.env.PORT}`))
     }
@@ -46,3 +48,4 @@ export class Application {
         })
     }
 }
+

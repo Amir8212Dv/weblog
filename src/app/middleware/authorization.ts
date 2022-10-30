@@ -11,12 +11,15 @@ export const authorization = async (req : Request , res : Response , next : Next
         
         if(!authToken) throw new createHttpError.Unauthorized('please login')
         const [bearer , token] = authToken.split(' ')
+
         if(bearer.toLowerCase() === 'bearer' && token) {
             const {_id} : TokenData = validateToken(token)
 
             const user = await userModel.findById(_id)
-
-            if(user) return next()
+            if(user) {
+                req.headers.userId = _id
+                return next()
+            }
         }
         throw new createHttpError.Unauthorized('please login')
         

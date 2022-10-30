@@ -4,5 +4,5 @@ import UserController from "../controller/user";
 
 export const userRoutes = Router()
 
-userRoutes.use('/create' , UserController.createAccount)
-userRoutes.use('/login' , UserController.login)
+userRoutes.post('/register' , UserController.createAccount)
+userRoutes.post('/login' , UserController.login)
