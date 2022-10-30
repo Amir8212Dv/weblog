@@ -24,6 +24,7 @@
     "@types/express": "^4.17.14",
     "@types/http-errors": "^2.0.0",
     "@types/http-status-codes": "^1.2.0",
+    "@types/jsonwebtoken": "^8.5.9",
     "@types/mongoose": "^5.11.97",
     "nodemon": "^2.0.20",
     "ts-node": "^10.9.1",
