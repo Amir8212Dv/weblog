@@ -38,9 +38,11 @@ export class Application {
             next(NotFound('page not found'))
         })
         this.app.use((error: any, req : Request , res : Response , next : NextFunction) => {
-            const errorStatusCode : number = error.statusCode || 500
-            const errorMessage : string = error.message || 'Internal server error'
-
+            const errorStatusCode : number = error.code === 11000 ? 400 : error.statusCode || 500
+            
+            const errorMessage : string = error.code === 11000 ? `entered ${Object.keys(error.keyValue)[0]} already exists` :
+            error.message || 'Internal server error'
+        
             res.status(errorStatusCode).send({
                 statusCode : errorStatusCode,
                 message : errorMessage

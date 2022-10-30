@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import { weblogModel } from "../models/weblog"
 import { CreateWeblogBody, UpdateWeblogBody } from "../types/weblog"
-import { createWeblogValidationSchema, updateWeblogValidationSchema } from "../validation/weblog"
+import { createWeblogValidationSchema, updateWeblogValidationSchema, validateObjectId } from "../validation/weblog"
 import httpStatusCode from 'http-status-codes'
 import mongoose from "mongoose"
 import createHttpError from "http-errors"
@@ -103,6 +103,7 @@ class WeblogController {
     async getWeblogById(req : Request , res : Response , next : NextFunction) {
         try {
             const {weblogId} = req.params
+            validateObjectId(weblogId)
 
             const [weblog] = await weblogModel.aggregate([
                 {

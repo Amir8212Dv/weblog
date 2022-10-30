@@ -2,11 +2,13 @@ import { NextFunction, Request, Response } from "express";
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
 import { weblogModel } from "../models/weblog";
+import { validateObjectId } from "../validation/weblog";
 
 
 export const checkUserAccessForWeblog = async (req : Request , res : Response , next : NextFunction) => {
     try {
         const {weblogId} = req.params
+        validateObjectId(weblogId)
         const userId = req.headers.userId
 
         const weblog = await weblogModel.findById(weblogId)
