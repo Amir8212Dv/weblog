@@ -18,7 +18,7 @@ export class Application {
         this.app.use(express.json())
         this.app.use(cors())
         this.app.use(express.urlencoded({extended : true}))
-        this.app.use(express.static(path.join(__dirname , 'public')))
+        this.app.use(express.static(path.join(__dirname , '..' , '..' , 'public')))
         this.app.use(router)
 
         this.app.listen(+(process.env.PORT as string) , () => console.log(`server running on localhost:${process.env.PORT}`))
@@ -39,7 +39,7 @@ export class Application {
         })
         this.app.use((error: any, req : Request , res : Response , next : NextFunction) => {
             const errorStatusCode : number = error.code === 11000 ? 400 : error.statusCode || 500
-            
+
             const errorMessage : string = error.code === 11000 ? `entered ${Object.keys(error.keyValue)[0]} already exists` :
             error.message || 'Internal server error'
         
